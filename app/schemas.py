@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from typing import Optional
 from datetime import datetime
 
@@ -21,3 +21,19 @@ class PostResponse(BaseModel):
         json_encoders = {
             datetime: lambda v: v.date()
         }
+
+class UserCreate(BaseModel):
+    email : EmailStr
+    password : str
+
+class UserOut(BaseModel):
+    id : int
+    email : EmailStr
+    created_on : datetime
+
+    class Config:
+        from_attributes = True
+        json_encoders = {
+            datetime: lambda v: v.date()
+        }
+    

@@ -17,13 +17,13 @@ class PostResponse(BaseModel):
     created_on: datetime
 
     class Config:
-        from_attributes = True
+        from_attributes = True # It tells Pydantic to treat ORM models as dictionaries, allowing for easier serialization and deserialization.
         json_encoders = {
             datetime: lambda v: v.date()
-        }
+        } # encodes the timestamp and returns only date.
 
 class UserCreate(BaseModel):
-    email : EmailStr
+    email : EmailStr # validates the email format.
     password : str
 
 class UserOut(BaseModel):
